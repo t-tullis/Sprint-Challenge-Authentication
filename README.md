@@ -32,15 +32,15 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - Sessions are used to allow a server to store information about a client. It'll persist authentication information so there is no need for the client to re-enter their credentials on every server request as long as the session is valid. 
 
-1. What does bcrypt do to help us store passwords in a secure manner.
+2. What does bcrypt do to help us store passwords in a secure manner.
 
 - bcrypt won't let you store a password as plain text.
 
-1. What does bcrypt do to slow down attackers?
+3. What does bcrypt do to slow down attackers?
 
 - bcrypt has accumulative hashing rounds so makes it harderd for an attacker to get your password. The attacked would need to have the hash, know the algorithm used, and how many rounds were used to generate the hash to get your password.
 
-1. What are the three parts of the JSON Web Token?
+4. What are the three parts of the JSON Web Token?
 
 - The header, payload, and signature
 
