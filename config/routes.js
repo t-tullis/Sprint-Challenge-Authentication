@@ -3,8 +3,18 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Users = require('./users-model.js')
 const secret = require('../api/secrets.js').jwtSecret;
-
 const { authenticate } = require('../auth/authenticate');
+
+const generateToken = user => {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
+  const options = {
+    expiresIn: '2m'
+  }
+  return jwt.sign(payload, secret, options)
+}
 
 module.exports = server => {
   server.post('/api/register', register);
@@ -14,6 +24,17 @@ module.exports = server => {
 
 function register(req, res) {
   // implement user registration
+  let user = req.body
+  const hash = bcrypt.hashSync(user.password, 4);
+  user.password = hash;
+
+  Users.register(user)
+  .then(saved => {
+    res.status(201).json(saved);
+  })
+  .catch(err => {
+    res.status(500).json(err)
+  })
 }
 
 function login(req, res) {
